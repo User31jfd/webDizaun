@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pizza Serhii</title>
+</head>
+<body>
+<table border="1" width="40%">
+  <tr>
+    <th colspan="2">Pizza Shop 2.0</th>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th style="text-align: center;"><input type="text" id="name" name="Name" placeholder="Name"/></th>
+  </tr>
+  <tr>
+    <th>Pizza Topping</th>
+    <td>
+      <input type="radio" name="topping" value="Supreme"> Supreme<br>
+      <input type="radio" name="topping" value="Vegetarian"> Vegetarian<br>
+      <input type="radio" name="topping" value="Hawaiian"> Hawaiian
+    </td>
+  </tr>
+  <tr>
+    <th>Pizza Sauce</th>
+    <td>
+      <select id="sauce">
+        <option selected>Tomato</option>
+        <option value="mushrooms">Mushrooms</option>
+        <option value="cheese">Cheese</option>
+        <option value="mustard">Mustard</option>
+        <option value="cucumbers">Cucumbers</option>
+        <option value="onion">Onion</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th>Optional Extras</th>
+    <td>
+      <input type="checkbox" id="extraCheese"> Extra Cheese<br>
+      <input type="checkbox" id="glutenFree"> Gluten Free Base
+    </td>
+  </tr>
+  <tr>
+    <th colspan="2"> Delivery Instructions:<br>
+      <textarea cols="60" rows="3" id="deliveryInstructions" placeholder="Enter your address where the pizza will be delivered to you"></textarea>
+    </th>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button onclick="submitOrder()">Send my Order</button>
+    </td>
+  </tr>
+</table>
+
+<table border="1" width="60%" id="orderTable">
+  <tr>
+    <th>Назва</th>
+    <th>Тип піци</th>
+    <th>Соус</th>
+    <th>Додаткові опції</th>
+    <th>Інструкція</th>
+  </tr>
+</table>
+
+<script>
+function submitOrder() {
+  var name = document.getElementById("name").value;
+  var topping = document.querySelector('input[name="topping"]:checked').value;
+  var sauce = document.getElementById("sauce").value;
+  var extraCheese = document.getElementById("extraCheese").checked ? "Extra Cheese" : "";
+  var glutenFree = document.getElementById("glutenFree").checked ? "Gluten Free Base" : "";
+  var deliveryInstructions = document.getElementById("deliveryInstructions").value;
+
+  var table = document.getElementById("orderTable");
+  var newRow = table.insertRow(-1); // -1 додає рядок в кінець таблиці
+
+  var cell1 = newRow.insertCell(0);
+  var cell2 = newRow.insertCell(1);
+  var cell3 = newRow.insertCell(2);
+  var cell4 = newRow.insertCell(3);
+  var cell5 = newRow.insertCell(4);
+
+  cell1.innerHTML = name;
+  cell2.innerHTML = topping;
+  cell3.innerHTML = sauce;
+  cell4.innerHTML = extraCheese + "<br>" + glutenFree;
+  cell5.innerHTML = deliveryInstructions;
+
+  // Очистити дані у формі після додавання рядка
+  document.getElementById("name").value = "";
+  document.querySelector('input[name="topping"]:checked').checked = false;
+  document.getElementById("sauce").selectedIndex = 0;
+  document.getElementById("extraCheese").checked = false;
+  document.getElementById("glutenFree").checked = false;
+  document.getElementById("deliveryInstructions").value = "";
+}
+</script>
+</body>
+</html>

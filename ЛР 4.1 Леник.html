@@ -1,0 +1,59 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Словник</title>
+</head>
+<body>
+
+<form id="dictionaryForm">
+  <label for="searchInput">Введіть слово:</label>
+  <input type="text" id="searchInput" name="searchInput">
+  <button type="submit">Пошук</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+  // Хеш-таблиця для зберігання пар слів і значень
+  const dictionary = {
+    "chiken": "курка",
+    "burger": "бургер",
+    "parrot": "папуга"
+    // Додайте більше слів і значень за потребою
+  };
+
+  // Функція для відображення значення слова або повідомлення про помилку
+  function displayResult(word) {
+    const resultDiv = document.getElementById('result');
+    if (word in dictionary) {
+      resultDiv.textContent = dictionary[word];
+    } else {
+      resultDiv.textContent = 'Слово не знайдено';
+    }
+  }
+
+  // Обробник події натискання кнопки "Пошук"
+  document.getElementById('dictionaryForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Зупиняємо стандартну дію форми
+
+    const searchInput = document.getElementById('searchInput').value.trim(); // Отримуємо введене слово
+    if (!searchInput) {
+      alert('Введіть слово, будь ласка.'); // Перевіряємо чи введено слово
+      return;
+    }
+
+    // Перевірка чи введено тільки букви
+    if (!/^[a-zA-Z]+$/.test(searchInput)) {
+      alert('Введено недопустимі символи. Введіть лише літери.');
+      return;
+    }
+
+    displayResult(searchInput.toLowerCase()); // Викликаємо функцію для відображення результату
+    document.getElementById('searchInput').value = ''; // Очищаємо поле введення
+  });
+</script>
+
+</body>
+</html>
